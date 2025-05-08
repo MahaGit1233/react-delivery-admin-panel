@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Image, Navbar } from "react-bootstrap";
 import AddItemsForm from "./AddItemsForm";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,7 +12,27 @@ const Admin = () => {
     const history = useHistory();
     const dispatch = useDispatch();
     const items = useSelector(state => state.items.items);
-    const adminMail = localStorage.getItem('adminMail').replace(/[.@]/g, '_');
+    const adminMail = localStorage.getItem('adminMail').replace(/[.@]/, '_');
+
+    useEffect(() => {
+        fetch(`https://restaurant-delivery-app-10419-default-rtdb.firebaseio.com/${adminMail}.json`, {
+            method: 'GET',
+            headers: {
+                'Content-type': 'application/json',
+            },
+        }).then((res) => {
+            if (!res.ok) {
+                throw new Error("Failed to fetch items");
+            }
+            return res.json();
+        }).then((data) => {
+            console.log(data);
+            const itemsArray = Object.values(data);
+            dispatch(itemsActions.setItem(itemsArray));
+        }).catch((err) => {
+            console.log(err);
+        })
+    }, [dispatch]);
 
     const logoutHandler = () => {
         dispatch(authActions.logout());

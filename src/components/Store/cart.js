@@ -12,6 +12,11 @@ const cartSlice = createSlice({
         },
         clearCart(state) {
             state.cartItems = [];
+            state.quantity = 0;
+
+            fetch(`https://restaurant-delivery-app-10419-default-rtdb.firebaseio.com/cart.json`, {
+                method: 'DELETE',
+            }).catch(err => console.log(err));
         },
         addItemToCart(state, action) {
             const newItem = action.payload;
@@ -37,6 +42,7 @@ const cartSlice = createSlice({
             const item = state.cartItems.find(item => item.name === action.payload);
             if (item) {
                 item.quantity += 1;
+                state.quantity += 1;
                 item.total = item.price * item.quantity;
 
                 fetch(`https://restaurant-delivery-app-10419-default-rtdb.firebaseio.com/cart/${item.name}.json`, {
@@ -50,6 +56,7 @@ const cartSlice = createSlice({
             state.cartFetched = true;
             if (item) {
                 item.quantity -= 1;
+                state.quantity -= 1;
                 item.total = item.price * item.quantity;
             }
             if (item.quantity === 0) {

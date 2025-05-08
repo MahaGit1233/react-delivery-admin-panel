@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import './Cart.css';
 import { useDispatch, useSelector } from "react-redux";
@@ -6,6 +6,7 @@ import { Button, Card, ListGroup } from "react-bootstrap";
 import { cartActions } from "../Store/redux";
 
 const Backdrop2 = () => {
+    const [showOrderForm, setShowOrderForm] = useState(false);
     const dispatch = useDispatch();
     const { cartItems, quantity, cartFetched } = useSelector((state) => state.cart);
 
@@ -33,40 +34,50 @@ const Backdrop2 = () => {
             return;
         }
 
+        const loggedEmail = localStorage.getItem('email');
+
         const orderData = {
             items: cartItems,
+            customer: loggedEmail.replace('_', '@').replace('_', '.'),
             totalPrice: cartItems.reduce((total, item) => total + item.price * item.quantity, 0),
             status: "pending",
             timestamp: new Date().toISOString(),
         };
 
         try {
-            const response = await fetch('https://restaurant-delivery-app-10419-default-rtdb.firebaseio.com/orders.json', {
+            const response = await fetch(`https://restaurant-delivery-app-10419-default-rtdb.firebaseio.com/orders/${loggedEmail}.json`, {
                 method: 'POST',
                 body: JSON.stringify(orderData),
                 headers: {
                     'Content-Type': 'application/json'
                 }
             });
+            const data = await response.json();
+            console.log(data);
 
             if (!response.ok) {
                 throw new Error('Failed to place order');
             }
 
-            dispatch(cartActions.clearCart());
-            dispatch(cartActions.toggleCart());
-            alert('Order placed successfully! It will be delivered soon.');
+            setShowOrderForm(true);
         } catch (error) {
             console.error("Error placing order:", error);
             alert("Something went wrong. Please try again.");
         }
     };
 
+    const continueOrderHandler = () => {
+        dispatch(cartActions.clearCart());
+        dispatch(cartActions.toggleCart());
+        alert('Order placed successfully! It will be delivered soon.');
+        setShowOrderForm(false);
+    };
+
     return (
         <div className="backdrop2" style={{ color: 'whitesmoke' }}>
-            <div style={{ width: '70%' }}>
+            {!showOrderForm ? <div style={{ width: '70%' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-around' }}>
-                    <h2>Your Cart ({quantity} items)</h2>
+                    <h2>Your Cart ({quantity} items) </h2>
                     <div style={{ display: 'flex', gap: '5%', width: '25%' }}>
                         <Button variant="danger" onClick={() => dispatch(cartActions.toggleCart())}>Close Cart</Button>
                         <Button variant="danger" onClick={orderHandler}>Order</Button>
@@ -80,7 +91,7 @@ const Backdrop2 = () => {
                             <Card style={{ width: '90%' }}>
                                 <Card.Body>
                                     <Card.Title>{item.name}</Card.Title>
-                                    <p>Price: ${item.price}</p>
+                                    <p>Price: ₹{item.price}</p>
                                     <p>Quantity: {item.quantity}</p>
                                     <div style={{ paddingLeft: '80%', marginTop: '-10%', display: 'flex', gap: '5%' }}>
                                         <Button variant="success" onClick={() => dispatch(cartActions.plus(item.name))}>+</Button>
@@ -91,7 +102,19 @@ const Backdrop2 = () => {
                         ))}
                     </ListGroup>
                 )}
-            </div>
+            </div> :
+                <div>
+                    <Card style={{ width: '50%', height: '25vh' }}>
+                        <h2 style={{ paddingTop: '15px', paddingLeft: '15px' }}>Total Price: ₹{cartItems.reduce((total, item) => total + item.price * item.quantity, 0)}</h2>
+                        <h3 style={{ paddingLeft: '20px' }}>Payment Method:</h3>
+                        <div style={{ paddingLeft: '45px' }}>
+                            <input type="radio" /> Cash On Delivery
+                        </div>
+                        <div style={{ display: 'flex', justifyContent: 'end', paddingRight: '15px' }}>
+                            <Button variant="outline-dark" onClick={continueOrderHandler}>Continue Order</Button>
+                        </div>
+                    </Card>
+                </div>}
         </div>
     );
 };

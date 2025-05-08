@@ -10,6 +10,7 @@ const Backdrop1 = (props) => {
     const [enteredItemImage, setEnteredItemImage] = useState('');
     const [enteredItemCategory, setEnteredItemCategory] = useState('');
     const [enteredIngredients, setEnteredIngredients] = useState('');
+    const [enteredProcedure, setEnteredProcedure] = useState('');
     const [enteredPrice, setEnteredPrice] = useState('');
     const [item, setItem] = useState({
         name: "",
@@ -26,6 +27,7 @@ const Backdrop1 = (props) => {
             setEnteredItemImage(props.existingItem.image);
             setEnteredItemCategory(props.existingItem.category);
             setEnteredIngredients(props.existingItem.ingredients);
+            setEnteredProcedure(props.existingItem.procedure);
             setEnteredPrice(props.existingItem.price);
         }
     }, [props.existingItem]);
@@ -56,6 +58,10 @@ const Backdrop1 = (props) => {
         setEnteredIngredients(event.target.value);
     };
 
+    const procedureHandler = (event) => {
+        setEnteredProcedure(event.target.value);
+    };
+
     const priceHandler = (event) => {
         setEnteredPrice(event.target.value);
     };
@@ -69,16 +75,17 @@ const Backdrop1 = (props) => {
             image: enteredItemImage,
             category: enteredItemCategory,
             ingredients: enteredIngredients,
+            procedure: enteredProcedure,
             price: enteredPrice,
         };
 
-        if (enteredItemName.length === 0 || enteredItemImage.length === 0 || enteredItemCategory === 0) {
+        if (enteredItemName.length === 0 || enteredItemImage.length === 0 || enteredItemCategory === 0 || enteredIngredients.length === 0 || enteredProcedure.length === 0 || enteredPrice.length === 0) {
             alert('Please fill all the fields');
         }
         if (props.existingItem) {
             dispatch(itemsActions.updateItem(updatedItem));
         } else {
-            dispatch(itemsActions.addItem(updatedItem));
+            props.onAddItem(updatedItem);
         }
 
         props.closeForm();
@@ -87,6 +94,7 @@ const Backdrop1 = (props) => {
         setEnteredItemImage('');
         setEnteredItemCategory('');
         setEnteredIngredients('');
+        setEnteredProcedure('');
         setEnteredPrice('');
     };
 
@@ -112,7 +120,11 @@ const Backdrop1 = (props) => {
                 </Form.Group>
                 <Form.Group>
                     <Form.Label className="formlabel">Ingredients:</Form.Label>
-                    <Form.Control style={{ backgroundColor: '#efebeb' }} className="forminput" as="textarea" rows={5} value={enteredIngredients} onChange={ingredientsHandler} placeholder="Enter Ingredients" />
+                    <Form.Control style={{ backgroundColor: '#efebeb' }} className="forminput" as="textarea" rows={2} value={enteredIngredients} onChange={ingredientsHandler} placeholder="Enter Ingredients" />
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label className="formlabel">Procedure:</Form.Label>
+                    <Form.Control style={{ backgroundColor: '#efebeb' }} className="forminput" as="textarea" rows={3} value={enteredProcedure} onChange={procedureHandler} placeholder="Enter Procedure" />
                 </Form.Group>
                 <Form.Group>
                     <Form.Label className="formlabel">Price:</Form.Label>

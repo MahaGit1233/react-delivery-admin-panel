@@ -35,7 +35,7 @@ const Menu = () => {
         }).catch((err) => {
             console.log(err);
         })
-    })
+    }, [dispatch]);
 
     const showLoginHandler = () => {
         setShowLogin(true);

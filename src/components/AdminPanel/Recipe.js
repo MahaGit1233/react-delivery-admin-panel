@@ -19,7 +19,7 @@ const Recipe = () => {
     const items = useSelector(state => state.items.items);
     console.log(items);
     const selectedItem = items.find(i => i.name.toLowerCase() === decodeURIComponent(itemName).toLowerCase());
-    console.log(selectedItem);
+    console.log(selectedItem.id);
 
     const logoutHandler = () => {
         dispatch(authActions.logout());
@@ -35,11 +35,11 @@ const Recipe = () => {
         setIsEditing(true);
     };
 
-    const deleteHandler = () => {
-        fetch(`https://restaurant-delivery-app-10419-default-rtdb.firebaseio.com/items/${selectedItem.name}.json`, {
+    const deleteHandler = (id) => {
+        fetch(`https://restaurant-delivery-app-10419-default-rtdb.firebaseio.com/${adminMail}/${id}.json`, {
             method: 'DELETE',
         }).then(() => {
-            dispatch(itemsActions.deleteItem(selectedItem.name));
+            dispatch(itemsActions.deleteItem(id));
             history.push('/admin');
         }).catch(err => console.log(err));
     };
@@ -57,7 +57,7 @@ const Recipe = () => {
                 </div>
             </Navbar>
             {isEditing ? <AddItemsForm existingItem={editItem} closeForm={() => setIsEditing(false)} onAddItem={(updatedItem) => {
-                dispatch(itemsActions.updatedItem(updatedItem));
+                dispatch(itemsActions.updateItem(updatedItem));
                 setIsEditing(false);
             }} /> : <div style={{ position: 'absolute', color: 'white', padding: '10px', marginTop: '5%', width: '100%', display: 'flex', justifyContent: 'space-between', fontFamily: 'Cascadia Code Light', fontSize: '18px' }}>
                 <Card style={{ backgroundColor: 'rgba(249, 244, 244, 0.28)', marginLeft: '25%', color: 'whitesmoke' }}>
@@ -79,11 +79,15 @@ const Recipe = () => {
                             </ul>
                         </div>
                     </div>
+                    <div style={{ marginLeft: '15%',paddingTop:'15px' }}>
+                        <h3>Procedure:</h3>
+                        <ul>{selectedItem.procedure}</ul>
+                    </div>
                     <div style={{ display: 'flex', justifyContent: 'space-between', paddingBottom: '20px' }}>
                         <h3 style={{ marginLeft: '5%' }}>Price: ₹{selectedItem.price}</h3>
                         <div style={{ marginRight: '5%', display: 'flex', gap: '5%' }}>
                             <Button onClick={startEditHandler} variant="outline-light">Edit</Button>
-                            <Button onClick={deleteHandler} variant="outline-light">Delete</Button>
+                            <Button onClick={() => deleteHandler(selectedItem.id)} variant="outline-light">Delete</Button>
                         </div>
                     </div>
                 </Card>

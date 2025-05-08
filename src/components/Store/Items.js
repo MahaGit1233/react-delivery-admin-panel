@@ -13,7 +13,13 @@ const itemsSlice = createSlice({
             state.items = action.payload;
         },
         deleteItem(state, action) {
-            state.items = state.items.filter(item => item.name !== action.payload);
+            state.items = state.items.filter(item => item.id !== action.payload);
+        },
+        updateItem(state, action) {
+            const index = state.items.findIndex(item => item.id === action.payload.id);
+            if (index !== -1) {
+                state.items[index] = action.payload;
+            }
         },
     },
 });

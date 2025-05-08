@@ -32,9 +32,9 @@ const UserDessert = () => {
             <Navbar style={{ position: 'absolute', color: 'white', padding: '10px', width: '100%', display: 'flex', justifyContent: 'space-between', fontFamily: 'Cascadia Code Light', fontSize: '18px' }}>
                 <div style={{ paddingLeft: '60px', paddingTop: '15px' }}>
                     <Image style={{ width: '7.5%' }} roundedCircle src="https://i.pinimg.com/736x/b0/5f/8d/b05f8d2080e9f42c50eaf81f1170d9cd.jpg" />
-                    <div style={{ marginTop: '-6%' }}>
+                    {/* <div style={{ marginTop: '-6%' }}>
                         <SearchBar onSearch={setSearchTerm} />
-                    </div>
+                    </div> */}
                 </div>
                 <div style={{ color: 'whitesmoke', width: '20%', display: 'flex', gap: '15%', marginRight: '15%' }}>
                     <div onClick={toggleCartHandler} style={{ fontSize: '20px' }}>🛒</div>

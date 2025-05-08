@@ -26,7 +26,7 @@ const Front = () => {
                     <div onClick={showLoginHandler}>Login</div>
                 </div>
             </Navbar>
-            <div style={{ position: 'absolute', top: '30%', color: '#81ddf4', fontFamily: 'Cascadia Code Light', textAlign: 'center', marginLeft: '20%' }}>
+            <div style={{ position: 'absolute', top: '30%', color: '#e3fe04', fontFamily: 'Cascadia Code Light', textAlign: 'center', marginLeft: '20%' }}>
                 <h3>Welcome to RSR Delivery - Delicious Food, Delivered Fast!</h3>
                 <h4 style={{ padding: '10px' }}>Craving Somehting Delicious?</h4>
                 <ul style={{ listStyleType: 'none', padding: '10px' }}>

@@ -45,7 +45,7 @@ const UserMenu = () => {
     };
 
     return (
-        <div style={{ position: 'absolute', paddingTop: '10%', top: '100%', width: '80%', height: '60%', color: '#81ddf4', fontFamily: 'Cascadia Code Light', textAlign: 'center', marginLeft: '10%' }}>
+        <div style={{ position: 'absolute', paddingTop: '5%', top: '100%', width: '80%', height: '60%', color: '#81ddf4', fontFamily: 'Cascadia Code Light', textAlign: 'center', marginLeft: '10%' }}>
             <Container>
                 <Row>
                     {categoriesArray.map((item) => (

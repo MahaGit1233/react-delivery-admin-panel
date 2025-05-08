@@ -5,14 +5,21 @@
     width: 100%;
     height: 100vh;
     z-index: 10;
+    overflow-y: auto;
     background: rgba(0, 0, 0, 0.35);
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
+.backdrop-content {
+    max-height: 80vh;
+    width: 50%;
+}
+
 .form1 {
     width: 30%;
+    margin-top: -5%;
 }
 
 .forminput {
