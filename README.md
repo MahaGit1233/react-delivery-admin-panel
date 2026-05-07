@@ -1,70 +1,62 @@
-# Getting Started with Create React App
+# Restaurant Delivery
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Restaurant Delivery is a food ordering web application that allows users to browse menus, add items to cart, place cash-on-delivery orders, and track order statuses, along with separate admin and user roles. Admins can manage recipes and update customer order statuses through an integrated order management system. The frontend is built using **React**, **JavaScript**, **HTML**, and **CSS**, while **Firebase** is used for authentication, backend services, and database management.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- User authentication with email verification
+- Password reset functionality
+- Role-based access for Admin and User
+- Browse restaurant menu without login
+- Add food items to cart
+- Cash on Delivery (COD) checkout option
+- Order placement and tracking system
+- Traffic signal style order status indicator
+- Admin dashboard for recipe management
+- Add, edit and delete recipes
+- Order management system for admins
+- Update customer order statuses
+- Responsive and interactive UI using React
 
-### `npm start`
+## Branches in Git
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+main: Full Restaurant Delivery Application (React frontend with Firebase authentication and database)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Tech Stack
 
-### `npm test`
+### Frontend
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- React.js
+- JavaScript
+- HTML
+- CSS
 
-### `npm run build`
+### Backend & Database
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Firebase Authentication
+- Firebase Realtime Database / Firestore
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Project Structure
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+src/
+├─ components/
+│ ├─ adminpanel/ # pages related to admin activities
+│ ├─ userinterface/ # pages related to user activities
+│ ├─ common/ # pages related to both admins and users
+│ ├─ store/ # pages for storing the values
 
-### `npm run eject`
+## Installation & Setup
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+npm install
+npm start
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Usage
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Browse the restaurant menu without logging in.
+- Sign up and verify email to access user features.
+- Log in securely using authenticated credentials.
+- Add food items to the cart and place orders.
+- Choose Cash on delivery during checkout.
+- Track order status through the order tracking section.
+- Admins can add, edit, and delete recipes.
+- Admins can manage and update customer order statuses.
