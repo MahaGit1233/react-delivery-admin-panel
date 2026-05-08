@@ -18,7 +18,7 @@ const Backdrop = (props) => {
     const isLogin = useSelector(state => state.auth.isLogin);
     const dispatch = useDispatch();
 
-    const url = isLogin ? 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCj9oGyo90vCE46gzhh79Gb4-trLFROrEI' : 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyA7C4ACvRyBZAw-sfFLXaKRhUnP86a6zMQ';
+    const url = isLogin ? 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCj9oGyo90vCE46gzhh79Gb4-trLFROrEI' : 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCj9oGyo90vCE46gzhh79Gb4-trLFROrEI';
 
     const switchModeHandler = () => {
         dispatch(authActions.toggle());
